@@ -2,15 +2,15 @@
 * attempt to make a space invaders
 ********************************************************************************************/
 #include <stddef.h>
+#include <memory>
+#include <cassert>
 
 #include "raylib.h"
 #include "scene/scene.h"
 #include "scene/first_scene.h"
 #include "scene_manager/scene_manager.h"
 
-Scene *& current_scene = SceneManager::GetInstance().getCurrentScene();
 bool game_running = true;
-
 
 void endGame() {
   game_running = false;
@@ -22,7 +22,7 @@ void initGame() {
 
   InitWindow(screenWidth, screenHeight, "raylib invaders");
   SetTargetFPS(60);
-  SceneManager::GetInstance().setCurrentScene(new FirstScene);
+  SceneManager::GetInstance().setCurrentScene(std::make_unique<FirstScene>());
 }
 
 void cleanupGame() {
@@ -31,28 +31,20 @@ void cleanupGame() {
 
 int main()
 {
-  // Initialization
-  //--------------------------------------------------------------------------------------
   initGame();
-  //--------------------------------------------------------------------------------------
 
+  // getting reference to current scene from scene manager
+  const std::unique_ptr<Scene>& current_scene = SceneManager::GetInstance().getCurrentScene();
+  assert(current_scene); // here we MUST have a scene
   // Main game loop
   while (!WindowShouldClose() || !game_running) {  // Detect window close button or ESC key
-    if (current_scene != NULL) {
-      current_scene->update();
-    }
-    // Draw
-    //----------------------------------------------------------------------------------
+    if (current_scene) current_scene->update();
     BeginDrawing();
-      if (current_scene != NULL) {
-        current_scene->draw();
-      }
+    if (current_scene) current_scene->draw();
     EndDrawing();
-    //----------------------------------------------------------------------------------
   }
   if (current_scene != NULL) {
     current_scene->unload();
-    delete current_scene;
   }
   // De-Initialization
   //--------------------------------------------------------------------------------------

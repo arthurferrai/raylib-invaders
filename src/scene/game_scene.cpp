@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "scene/game_scene.h"
 #include "scene/first_scene.h"
 #include "scene_manager/scene_manager.h"
@@ -153,7 +155,7 @@ void GameScene::update() {
     updateEnemies();
     checkGameOver();
   } else if (IsKeyPressed(KEY_ENTER)) {
-    SceneManager::GetInstance().setCurrentScene(new FirstScene);
+    SceneManager::GetInstance().setCurrentScene(std::make_unique<FirstScene>());
   }
   #ifdef DEBUG
   if (IsKeyPressed(KEY_R)) init();

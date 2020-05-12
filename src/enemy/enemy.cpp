@@ -6,7 +6,7 @@ void Enemy::draw() const {
 }
 
 void EnemyArray::draw() const {
-  for (auto it = begin(); it != end(); it++) {
-    it->draw();
+  for (const Enemy& e : *this) {
+    e.draw();
   }
 }

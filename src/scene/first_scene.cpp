@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "scene/first_scene.h"
 #include "scene/game_scene.h"
 #include "scene_manager/scene_manager.h"
@@ -24,6 +26,6 @@ void FirstScene::draw() const {
 
 void FirstScene::update() {
   if(IsKeyPressed(KEY_ENTER)) {
-    SceneManager::GetInstance().setCurrentScene(new GameScene);
+    SceneManager::GetInstance().setCurrentScene(std::make_unique<GameScene>());
   }
 }
