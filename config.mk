@@ -30,7 +30,7 @@ CXXFLAGS = -std=c++14
 # Add optimizations only if DEBUG is not defined
 ifndef DEBUG
   CFLAGS += -O3
-	CXXFLAGS += -O3
+  CXXFLAGS += -O3
 endif
 
 # The C Preprocessor options (notice here "CPP" does not mean "C++"; man cpp for more info.). Actually $(INCLUDE) is included.

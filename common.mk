@@ -19,6 +19,12 @@ endif
 # Add debug flag if DEBUG is defined
 ifdef DEBUG
   EXTRA_CFLAGS += -D DEBUG
+  BUILD_PATH := $(BUILD_PATH)/debug
+  OBJ_DIR := $(OBJ_DIR)/debug
+else
+  EXTRA_CFLAGS += -D NDEBUG
+  BUILD_PATH := $(BUILD_PATH)/release
+  OBJ_DIR := $(OBJ_DIR)/release
 endif
 
 #Actually $(INCLUDE) is included in $(CPPFLAGS).
@@ -46,7 +52,7 @@ all: $(BUILD_PATH)/$(PROJECT_NAME)
 # Rules for creating dependency files (.d).
 #------------------------------------------
 DEPEND_HEADER      = echo -n Creating dependencies for $<...
-PRE_DEPEND_COMMAND = printf "$(OBJ_DIR)/$(dir $<)" > $@
+PRE_DEPEND_COMMAND = $(MKDIR) "$(OBJ_DIR)/$(dir $<)"; printf "$(OBJ_DIR)/$(dir $<)" > $@
 DEPEND_COMMAND     = $(DEPEND.d) -MM $< >> $@
 DEPEND_FOOTER      = echo Done.
 
@@ -226,3 +232,4 @@ show:
 	@echo 'COMPILE.cxx :' $(COMPILE.cxx)
 	@echo 'link.c      :' $(LINK.c)
 	@echo 'link.cxx    :' $(LINK.cxx)
+	@echo 'BUILD_PATH  :' $(BUILD_PATH)
