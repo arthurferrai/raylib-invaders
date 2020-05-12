@@ -23,9 +23,15 @@ INCLUDE = -I./lib/raylib -I./src
 SRCDIRS =
 
 # compiler and preprocessor flags for C
-CFLAGS = -O3
+CFLAGS =
 # compiler and preprocessor flags for C++
-CXXFLAGS = -std=c++14 -O3
+CXXFLAGS = -std=c++14
+
+# Add optimizations only if DEBUG is not defined
+ifndef DEBUG
+  CFLAGS += -O3
+	CXXFLAGS += -O3
+endif
 
 # The C Preprocessor options (notice here "CPP" does not mean "C++"; man cpp for more info.). Actually $(INCLUDE) is included.
 CPPFLAGS = -Wall -Wextra    # helpful for writing better code (behavior-related)

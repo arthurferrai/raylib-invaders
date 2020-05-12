@@ -16,6 +16,11 @@ ifeq ($(SRCDIRS),)
 	SRCDIRS += .
 endif
 
+# Add debug flag if DEBUG is defined
+ifdef DEBUG
+  EXTRA_CFLAGS += -D DEBUG
+endif
+
 #Actually $(INCLUDE) is included in $(CPPFLAGS).
 CPPFLAGS += $(INCLUDE)
 
