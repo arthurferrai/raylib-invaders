@@ -1,7 +1,6 @@
 /*******************************************************************************************
 * attempt to make a space invaders
 ********************************************************************************************/
-#include <stddef.h>
 #include <memory>
 #include <cassert>
 
@@ -29,27 +28,20 @@ void cleanupGame() {
   CloseWindow();
 }
 
-int main()
-{
+int main() {
   initGame();
-
   // getting reference to current scene from scene manager
   const std::unique_ptr<Scene>& current_scene = SceneManager::GetInstance().getCurrentScene();
   assert(current_scene); // here we MUST have a scene
   // Main game loop
   while (!WindowShouldClose() || !game_running) {  // Detect window close button or ESC key
-    if (current_scene) current_scene->update();
+    current_scene->update();
     BeginDrawing();
-    if (current_scene) current_scene->draw();
+    current_scene->draw();
     EndDrawing();
   }
-  if (current_scene != NULL) {
-    current_scene->unload();
-  }
-  // De-Initialization
-  //--------------------------------------------------------------------------------------
+  current_scene->unload();
   cleanupGame();
-  //--------------------------------------------------------------------------------------
 
   return 0;
 }
