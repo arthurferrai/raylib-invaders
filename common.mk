@@ -18,7 +18,7 @@ endif
 
 # Add debug flag if DEBUG is defined
 ifdef DEBUG
-  EXTRA_CFLAGS += -D DEBUG
+  EXTRA_CFLAGS += -D DEBUG -g
   BUILD_PATH := $(BUILD_PATH)/debug
   OBJ_DIR := $(OBJ_DIR)/debug
 else
