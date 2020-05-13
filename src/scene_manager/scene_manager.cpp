@@ -1,3 +1,4 @@
+#include <cassert>
 #include "scene_manager/scene_manager.h"
 
 SceneManager& SceneManager::GetInstance() {
@@ -14,6 +15,7 @@ void SceneManager::setCurrentScene(Scene* new_scene) {
 }
 
 void SceneManager::setCurrentScene(std::unique_ptr<Scene> new_scene) {
+  assert(new_scene);
   if (current_scene) current_scene->unload();
   current_scene = std::move(new_scene);
   current_scene->init();
