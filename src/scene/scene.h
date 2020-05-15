@@ -2,18 +2,12 @@
 #define __SCENE_H_DEFINED__
 class Scene {
   public:
+  Scene() {}
   virtual ~Scene() {};
 
   virtual void init() {};
   virtual void update() {};
-  virtual void draw() const {};
+  virtual void draw() const = 0;
   virtual void unload() {};
-
-  protected:
-  Scene() = default;
-  Scene(const Scene&) = default;
-  Scene(Scene&&) = default;
-  Scene& operator= (const Scene&) = default;
-  Scene& operator= (Scene&&) = default;
 };
 #endif

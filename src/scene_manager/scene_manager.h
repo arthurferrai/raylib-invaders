@@ -6,21 +6,11 @@
 
 class SceneManager {
 public:
+  SceneManager(std::unique_ptr<Scene> start_scene);
 
-  static SceneManager& GetInstance();
-
-  const std::unique_ptr<Scene>& getCurrentScene() const;
-  void setCurrentScene(Scene*);
+  Scene& getCurrentScene() const;
   void setCurrentScene(std::unique_ptr<Scene>);
-
-  // Disable all copy/move constructuctors
-  SceneManager(const SceneManager&) = delete;
-  SceneManager(SceneManager&&) = delete;
-  SceneManager& operator=(const SceneManager&) = delete;
-  SceneManager& operator=(SceneManager&&) = delete;
-
-protected:
-  SceneManager() : current_scene{nullptr} {}
+private:
   std::unique_ptr<Scene> current_scene;
 };
 

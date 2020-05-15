@@ -2,26 +2,26 @@
 
 #include "scene/game_scene.h"
 #include "scene/first_scene.h"
-#include "scene_manager/scene_manager.h"
+#include "game/game.h"
 
-const float PLAYER_WIDTH = 40;
-const float PLAYER_HEIGHT = 15;
-const float PLAYER_SPEED = 5;
+constexpr float PLAYER_WIDTH = 40;
+constexpr float PLAYER_HEIGHT = 15;
+constexpr float PLAYER_SPEED = 5;
 
-const unsigned int NUM_BULLETS = 4;
+constexpr unsigned int NUM_BULLETS = 4;
 
-const float BULLET_WIDTH = 5;
-const float BULLET_HEIGHT = 15;
-const float BULLET_SPEED = 5;
+constexpr float BULLET_WIDTH = 5;
+constexpr float BULLET_HEIGHT = 15;
+constexpr float BULLET_SPEED = 5;
 
-const int NUM_ENEMIES = 50;
-const float ENEMY_WIDTH = 30;
-const float ENEMY_HEIGHT = 30;
+constexpr int NUM_ENEMIES = 50;
+constexpr float ENEMY_WIDTH = 30;
+constexpr float ENEMY_HEIGHT = 30;
 
-const int NUM_ROWS = 5;
-const int ENEMY_SPEED = 1;
+constexpr int NUM_ROWS = 5;
+constexpr int ENEMY_SPEED = 1;
 
-const int enemiesPerRow = NUM_ENEMIES / NUM_ROWS;
+constexpr int enemiesPerRow = NUM_ENEMIES / NUM_ROWS;
 
 GameScene::GameScene() :
   isGameOver{false},
@@ -155,7 +155,7 @@ void GameScene::update() {
     updateEnemies();
     checkGameOver();
   } else if (IsKeyPressed(KEY_ENTER)) {
-    SceneManager::GetInstance().setCurrentScene(std::make_unique<FirstScene>());
+    Game::Instance().getSceneManager().setCurrentScene(std::make_unique<FirstScene>());
   }
   #ifdef DEBUG
   if (IsKeyPressed(KEY_R)) init();

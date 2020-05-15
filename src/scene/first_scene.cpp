@@ -2,7 +2,7 @@
 
 #include "scene/first_scene.h"
 #include "scene/game_scene.h"
-#include "scene_manager/scene_manager.h"
+#include "game/game.h"
 
 FirstScene::FirstScene() {
   Image game_over_image = ImageText("SPACE\nINVADERS", 40, RED);
@@ -26,6 +26,6 @@ void FirstScene::draw() const {
 
 void FirstScene::update() {
   if(IsKeyPressed(KEY_ENTER)) {
-    SceneManager::GetInstance().setCurrentScene(std::make_unique<GameScene>());
+    Game::Instance().getSceneManager().setCurrentScene(std::make_unique<GameScene>());
   }
 }
